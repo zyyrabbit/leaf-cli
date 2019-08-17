@@ -9,16 +9,22 @@
     "leaf-update": "bin/leaf-update.js"
   },
   "scripts": {
+    "pub": "np --yolo && auto-changelog",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Leaf",
   "license": "MIT",
   "dependencies": {
+    "@leafs/app": "^0.1.26",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "download-git-repo": "^2.0.0",
     "inquirer": "^6.4.1",
     "ora": "^3.4.0",
     "rimraf": "^3.0.0"
+  },
+  "devDependencies": {
+    "auto-changelog": "^1.15.0",
+    "np": "^5.0.3"
   }
 }

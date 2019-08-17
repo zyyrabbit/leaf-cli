@@ -5,9 +5,11 @@ const chalk = require('chalk');
 const ora = require('ora');
 const path = require('path');
 const rm = require('rimraf').sync;
+const { spawn } = require('child_process');
 const config = require('../config.js');
 const utils = require('../utils');
 const spinner = ora('loading @leafs/app');
+const crossNpm = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
 
 program.parse(process.argv)
 
@@ -17,6 +19,7 @@ program
 if (program.args.length < 1) return program.help();
 
 const projectName = program.args[0];
+const projectPath = path.join(process.cwd(), projectName);
 
 spinner.color = 'green';
 spinner.text = 'downloading template……';
@@ -28,21 +31,32 @@ download(`direct:${config.gitUrl}`, projectName, { clone: true }, function (err)
     spinner.text = `Error: ${err}`;
     spinner.fail();
     // fail rm the project floder
-    rm(path.join(process.cwd(), projectName));
+    rm(projectPath);
    
   } else {
 
-    utils.copyDirSync('./.leaf', path.join(process.cwd(), projectName, '.leaf'));
+    utils.copyDirSync('./.leaf', path.join(projectPath, '.leaf'));
 
-    spinner.text = 'download success!';
-    spinner.succeed();
-    
-    const startCmd = 'npm run serve';
-    console.log(chalk.white('please run '), 
-    chalk.bgBlue(`cd ${projectName} && npm i && ${startCmd}`), 
-    chalk.white('to start it'));
+    const child = spawn(crossNpm, ['i'], {
+      cwd: projectPath
+    });
 
-    spinner.stop();
+    child.on('close', function(code) {
+      if (code === 0) {
+        spinner.text = 'create leaf project success!';
+        spinner.succeed();
+
+        const startCmd = 'leaf start';
+        console.log(chalk.white('please run '), 
+        chalk.bgBlue(`cd ${projectName} && ${startCmd}`), 
+        chalk.white('to start it'));
+
+      } else {
+        spinner.text = 'create leaf project fail!';
+        spinner.fail();
+      }
+      spinner.stop();
+    });
   }
 });
 
