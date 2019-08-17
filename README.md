@@ -1,7 +1,28 @@
 # leaf-cli
 
-### 启动命令行
+1. 全局安装leaf命令 
 
-1. npm install --save leaf-cli
+```
+npm install -g leaf-cli
 
-2. leaf init 初始化
+```
+
+### 命令
+
+1. 创建项目
+
+```
+leaf create [your project]
+```
+2. 启动leaf框架
+
+```
+leaf start
+```
+
+3. 升级leaf框架
+
+```
+leaf update
+```
+
