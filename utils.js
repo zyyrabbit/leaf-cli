@@ -9,6 +9,7 @@ exports.copyDirSync = function copyDir(src, dest) {
       currSrcPath,
       currDestPath;
   files = fs.readdirSync(src);
+  
   files.forEach(function(path) {
     currSrcPath = src + '/' + path;
     currDestPath = dest + '/' + path;

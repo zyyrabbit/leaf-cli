@@ -19,7 +19,7 @@ program
 if (program.args.length < 1) return program.help();
 
 const projectName = program.args[0];
-const projectPath = path.join(process.cwd(), projectName);
+const projectPath = path.resolve(projectName);
 
 spinner.color = 'green';
 spinner.text = 'downloading template……';
@@ -35,13 +35,14 @@ download(`direct:${config.gitUrl}`, projectName, { clone: true }, function (err)
    
   } else {
 
-    utils.copyDirSync('./.leaf', path.join(projectPath, '.leaf'));
+    utils.copyDirSync(path.join(__dirname, '../.leaf'), path.join(projectPath, '.leaf'));
 
     const child = spawn(crossNpm, ['i'], {
-      cwd: projectPath
+      cwd: projectPath,
+      stdio: 'inherit' 
     });
 
-    child.on('close', function(code) {
+    child.on('exit', function(code) {
       if (code === 0) {
         spinner.text = 'create leaf project success!';
         spinner.succeed();

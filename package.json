@@ -15,7 +15,7 @@
   "author": "Leaf",
   "license": "MIT",
   "dependencies": {
-    "@leafs/app": "^0.1.26",
+    "@leafs/app": "^0.1.30",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "download-git-repo": "^2.0.0",
