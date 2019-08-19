@@ -1,6 +1,6 @@
 {
   "name": "@leafs/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "leaf-cli",
   "main": "index.js",
   "bin": {
