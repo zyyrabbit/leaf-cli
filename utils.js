@@ -3,7 +3,7 @@ const fs = require('fs')
 exports.copyDirSync = function copyDir(src, dest) {
  
   if (!fs.existsSync(src)) return -1;
-  if (!fs.existsSync(dest)) fs.mkdirSync(dest);
+  if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
  
   let files = [],
       currSrcPath,

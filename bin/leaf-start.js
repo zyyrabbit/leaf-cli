@@ -4,7 +4,7 @@ const { spawn } = require('child_process');
 const crossNpm = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
 const child = spawn(crossNpm, ['run', 'serve'], { stdio: 'inherit' });
  
-child.on('close', function(code, signal) {
+child.on('exit', function(code, signal) {
   if (code === 0) {
     spinner.text = 'start leaf project success!';
     spinner.succeed();
