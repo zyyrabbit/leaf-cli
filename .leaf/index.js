@@ -20,13 +20,19 @@ export default function getDeps() {
     const headerItem = require.context('@', true, /components\/_HeaderItems\.vue$/);
     
     headerItem._keys = headerItem.keys().filter(v => v === './components/_HeaderItems.vue');
-    
-    // 自动加载全局组件
+
+    // 自动加载全局指令
     const extComps = require.context('@', true, /components\/[^_][^\/]*\.vue$/);
     
     extComps._keys = extComps.keys().filter(v => {
       return /^\.\/components\/[^_][^\/]*\.vue$/.test(v)
     });
+
+    // 自动加载全局组件
+    const extDirectives = require.context('@', true, /directives\/[^_][^\/]*\.(ts|js)$/);
+   
+    // 自动加载mixin
+    const extMixins = require.context('@', true, /mixins\/[^_][^\/]*\.(ts|js)$/);
 
     // 自动加载store module
     const module = require.context('@/store/modules', true, /\.module\.(ts|js)$/);
@@ -42,6 +48,8 @@ export default function getDeps() {
       module,
       extComps,
       routerConfigs,
+      extDirectives,
+      extMixins,
       setting,
       indexScss,
       extSvgs,
