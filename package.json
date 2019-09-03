@@ -4,9 +4,7 @@
   "description": "leaf-cli",
   "main": "index.js",
   "bin": {
-    "leaf": "bin/leaf.js",
-    "leaf-create": "bin/leaf-create.js",
-    "leaf-update": "bin/leaf-update.js"
+    "leaf": "bin/leaf.js"
   },
   "scripts": {
     "pub": "np --yolo && auto-changelog",

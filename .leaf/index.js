@@ -1,8 +1,12 @@
 
 export default function getDeps() {
-  
+    // reuqire.context 可以解决文件夹不存在，也不报错的问题
+
     const indexScss = require.context('@', true, /assets\/style\/index\.scss$/);
     indexScss._keys = indexScss.keys().filter(v => v === './assets/style/index.scss');
+
+    const logo = require.context('@', true, /assets\/img\/logo\.(svg|png|jpg)$/);
+    logo._keys = logo.keys().filter(v => /^\.\/assets\/img\/logo.(svg|png|jpg)$/.test(v));
     
     // 自动加载svg
     const extSvgs = require.context('@', true, /assets\/svg\/.*\.svg$/);
@@ -39,7 +43,7 @@ export default function getDeps() {
 
     const routerConfigs = require.context('@/views', true, /\.router\.(ts|js)$/);
 
-     // 引入设置
+    // 引入设置
     const setting  = require.context('@', false, /setting\.(ts|js)$/);
 
    
@@ -54,6 +58,7 @@ export default function getDeps() {
       indexScss,
       extSvgs,
       extutil,
+      logo,
     }
 
 }
