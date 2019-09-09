@@ -18,7 +18,7 @@ program
     require('../lib/create')(name)
   })
 
- program
+program
   .command('start')
   .description('start a leaf project')
   .action(() => {
@@ -32,7 +32,7 @@ program
     require('../lib/update')()
   })
 
-// unknown commands
+// 处理未知命令
 program
   .arguments('<command>')
   .action((cmd) => {
