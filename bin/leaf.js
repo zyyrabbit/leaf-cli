@@ -2,7 +2,6 @@
 
 const chalk = require('chalk');
 const program = require('commander');
-const utils = require('../utils');
 
 program
   .version(require('../package').version)

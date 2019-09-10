@@ -16,10 +16,17 @@
     "@leafs/app": "^0.1.30",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
+    "deepmerge": "^4.0.0",
     "download-git-repo": "^2.0.0",
+    "ejs": "^2.7.1",
+    "globby": "^10.0.1",
     "inquirer": "^6.4.1",
     "ora": "^3.4.0",
-    "rimraf": "^3.0.0"
+    "resolve": "^1.12.0",
+    "rimraf": "^3.0.0",
+    "semver": "^6.3.0",
+    "string.prototype.padstart": "^3.0.0",
+    "yaml-front-matter": "^4.0.0"
   },
   "devDependencies": {
     "auto-changelog": "^1.15.0",
