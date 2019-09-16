@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-19 11:11:23
+ * @LastEditTime: 2019-09-12 18:02:43
+ * @LastEditors: Please set LastEditors
+ */
 
 const chalk = require('chalk');
 const program = require('commander');
@@ -52,4 +59,18 @@ program.parse(process.argv)
 if (!process.argv.slice(2).length) {
   program.outputHelp()
 }
+
+function cleanArgs (cmd) {
+  const args = {}
+  cmd.options.forEach(o => {
+    const key = camelize(o.long.replace(/^--/, ''))
+    // if an option is not present and Command has a method with the same name
+    // it should not be copied
+    if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
+      args[key] = cmd[key]
+    }
+  })
+  return args
+}
+
 
