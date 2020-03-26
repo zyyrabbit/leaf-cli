@@ -3,7 +3,7 @@
 1. 全局安装leaf命令 
 
 ```
-npm install -g leaf-cli
+npm install -g @leafs/cli
 
 ```
 

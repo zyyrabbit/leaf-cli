@@ -1,1 +1,0 @@
-### store module，会被自动注册
