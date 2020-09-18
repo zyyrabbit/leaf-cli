@@ -1,6 +1,6 @@
 {
   "name": "@leafs/cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "leaf-cli",
   "main": "index.js",
   "bin": {
@@ -24,6 +24,7 @@
     "inquirer": "^6.4.1",
     "isbinaryfile": "^4.0.2",
     "javascript-stringify": "^2.0.0",
+    "node-ssh": "^11.0.0",
     "ora": "^3.4.0",
     "resolve": "^1.12.0",
     "rimraf": "^3.0.0",

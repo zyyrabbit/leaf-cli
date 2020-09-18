@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * @Description: In User Settings Edit
- * @Author: your name
+ * @Author: zhangyiyong
  * @Date: 2019-08-19 11:11:23
  * @LastEditTime: 2019-09-12 18:02:43
  * @LastEditors: Please set LastEditors
@@ -12,6 +12,7 @@ const program = require('commander');
 const semver = require('semver');
 const requiredVersion = require('../package.json').engines.node;
 
+// 检查版本
 function checkNodeVersion (wanted, id) {
   if (!semver.satisfies(process.version, wanted)) {
     console.log(chalk.red(
@@ -36,6 +37,7 @@ program
   .version(require('../package').version)
   .usage('<command> [options]')
 
+// 创建项目
 program
   .command('create <app-name>')
   .description('create a new leaf project')
@@ -46,19 +48,41 @@ program
     require('../lib/create')(name)
   })
 
+// 启动项目
 program
   .command('start')
   .description('start a leaf project')
   .action(() => {
     require('../lib/start')()
   })
-
+  
+// 更新项目
 program
   .command('update')
   .description('update a leaf project')
   .action(() => {
     require('../lib/update')()
   })
+
+// 部署项目
+program
+  .command('deploy <action>')
+  .option('-e, --env <env>', 'select the tag env')
+  .option('-t, --tag <tag>', 'select the roolback env tag')
+  .description('deploy a frontend project')
+  .action((action, cmd) => {
+    require('../lib/deploy')(action, {
+      env: cmd.env,
+      tag: cmd.tag
+    })
+  }).on('--help', function() {
+    console.log('  deploy init    generator the config');
+    console.log('  deploy env     select env to run');
+    console.log('  deploy tag env   query tag');
+    console.log('  deploy rollback tag env roolback to the vesion');
+  });
+ 
+
 
 // 处理未知命令
 program
@@ -81,18 +105,4 @@ program.parse(process.argv)
 if (!process.argv.slice(2).length) {
   program.outputHelp()
 }
-
-function cleanArgs (cmd) {
-  const args = {}
-  cmd.options.forEach(o => {
-    const key = camelize(o.long.replace(/^--/, ''))
-    // if an option is not present and Command has a method with the same name
-    // it should not be copied
-    if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
-      args[key] = cmd[key]
-    }
-  })
-  return args
-}
-
 
