@@ -77,9 +77,9 @@ program
     })
   }).on('--help', function() {
     console.log('  deploy init    generator the config');
-    console.log('  deploy env     select env to run');
-    console.log('  deploy tag env   query tag');
-    console.log('  deploy rollback tag env roolback to the vesion');
+    console.log('  deploy <env>     select a env to deploy');
+    console.log('  deploy tag -e <env>   query tag');
+    console.log('  deploy rollback -e <env> -t <tag>  roolback to the env of tag');
   });
  
 
